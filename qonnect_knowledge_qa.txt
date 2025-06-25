@@ -1,0 +1,305 @@
+Q: What is Qonnect?
+A: Qonnect is a campus bot designed to answer student queries.
+
+Q: How do I reset my campus password?
+A: Visit the IT helpdesk or use the online password reset portal.
+
+Q: Where can I find the academic calendar?
+A: The academic calendar is available on the university website under the 'Academics' section.
+
+Q: How do I contact the admissions office?
+A: You can contact the admissions office via email at admissions@university.edu or call 123-456-7890.
+
+Q: What are the library opening hours?
+A: The library is open from 8 AM to 10 PM on weekdays and 9 AM to 6 PM on weekends.
+
+Q: How do I apply for a scholarship?
+A: Scholarship applications can be submitted online through the student portal.
+
+Q: Where is the cafeteria located?
+A: The cafeteria is located on the ground floor of the main building.
+
+Q: How do I join a student club?
+A: Visit the student affairs office or check the clubs section on the university website.
+
+Q: What is the Wi-Fi password on campus?
+A: The Wi-Fi password is provided during student orientation or can be requested from IT support.
+
+Q: How do I report a lost item?
+A: Report lost items to the campus security office located near the main entrance.
+
+Q: How can I access online classes?
+A: Online classes can be accessed through the university's learning management system (LMS).
+
+Q: What is the process for course registration?
+A: Course registration is done online via the student portal during the registration period.
+
+Q: How do I get a student ID card?
+A: Student ID cards are issued at the administration office after enrollment.
+
+Q: Where can I find exam schedules?
+A: Exam schedules are posted on the notice board and the university website.
+
+Q: How do I request a transcript?
+A: Transcripts can be requested from the registrar's office or through the student portal.
+
+Q: What is the grading system?
+A: The university uses a letter grading system from A+ to F.
+
+Q: How do I pay tuition fees?
+A: Tuition fees can be paid online or at the finance office.
+
+Q: Who do I contact for technical support?
+A: Contact the IT helpdesk at ithelp@university.edu for technical support.
+
+Q: How do I book a study room in the library?
+A: Study rooms can be booked online or at the library reception desk.
+
+Q: What sports facilities are available on campus?
+A: The campus has a gym, swimming pool, basketball courts, and a football field.
+
+Q: How do I update my contact information?
+A: Update your contact information through the student portal.
+
+Q: Where can I find information about internships?
+A: Internship opportunities are listed on the career services page of the university website.
+
+Q: How do I access my university email?
+A: University email can be accessed via the webmail portal using your student credentials.
+
+Q: What is the dress code on campus?
+A: The dress code is smart casual unless specified otherwise for certain events.
+
+Q: How do I appeal a grade?
+A: Grade appeals can be submitted to the academic office within two weeks of results publication.
+
+Q: Where is the health center located?
+A: The health center is located next to the sports complex.
+
+Q: How do I get a parking permit?
+A: Parking permits are issued by the campus security office.
+
+Q: What is the process for withdrawing from a course?
+A: Submit a course withdrawal form to the registrar's office before the deadline.
+
+Q: How do I access the campus shuttle service?
+A: Shuttle schedules and routes are available on the university website.
+
+Q: Where can I find the student handbook?
+A: The student handbook is available for download from the student portal.
+
+Q: How do I request special accommodations?
+A: Contact the student support office to request special accommodations.
+
+Q: What is the university's plagiarism policy?
+A: The university has a zero-tolerance policy for plagiarism; details are in the student handbook.
+
+Q: How do I participate in exchange programs?
+A: Exchange program details are available at the international office.
+
+Q: Where can I get academic advising?
+A: Academic advisors are available in the academic affairs office.
+
+Q: How do I reset my LMS password?
+A: Use the 'Forgot Password' link on the LMS login page.
+
+Q: What is the process for graduation?
+A: Graduation requirements and procedures are outlined on the registrar's page.
+
+Q: How do I join the alumni network?
+A: Register on the alumni section of the university website.
+
+Q: Where can I find campus maps?
+A: Campus maps are available at the information desk and online.
+
+Q: How do I submit feedback about a course?
+A: Course feedback forms are available at the end of each semester on the LMS.
+
+Q: What is the emergency contact number?
+A: The campus emergency contact number is 999.
+
+Q: How do I access mental health services?
+A: Mental health services are provided at the health center.
+
+Q: Where can I find information about student housing?
+A: Student housing details are on the university website under 'Campus Life.'
+
+Q: How do I request a leave of absence?
+A: Submit a leave of absence request to the academic office.
+
+Q: What is the policy on attendance?
+A: Students must attend at least 75% of classes to be eligible for exams.
+
+Q: How do I get involved in research projects?
+A: Contact your department or visit the research office for opportunities.
+
+Q: Where can I print documents on campus?
+A: Printing services are available in the library and computer labs.
+
+Q: How do I access financial aid?
+A: Financial aid information is available at the finance office and online.
+
+Q: What is the process for changing my major?
+A: Submit a major change request form to the academic office.
+
+Q: How do I report harassment or discrimination?
+A: Report incidents to the student support office or use the anonymous online form.
+
+Q: Where can I find lost and found?
+A: The lost and found is managed by campus security.
+
+Q: How do I register for workshops?
+A: Workshop registration is available through the student portal.
+
+Q: What is the university's refund policy?
+A: Refund policies are detailed on the finance office page.
+
+Q: How do I access the gym?
+A: Register at the sports complex reception to access the gym.
+
+Q: Where can I get textbooks?
+A: Textbooks are available at the campus bookstore and library.
+
+Q: How do I join student government?
+A: Elections and application details are posted on the student portal.
+
+Q: What is the process for late registration?
+A: Late registration requests must be approved by the academic office.
+
+Q: How do I access disability services?
+A: Disability services are coordinated by the student support office.
+
+Q: Where can I find information about campus events?
+A: Campus events are listed on the university website and notice boards.
+
+Q: How do I request a letter of recommendation?
+A: Request letters from your professors or the academic office.
+
+Q: What is the policy on mobile phones in class?
+A: Mobile phones should be on silent and not used during lectures.
+
+Q: How do I access the student portal?
+A: The student portal is accessible via the university website with your credentials.
+
+Q: Where can I get help with career planning?
+A: Career services are available at the career center.
+
+Q: How do I participate in sports teams?
+A: Tryouts and sign-ups are announced by the sports department.
+
+Q: What is the process for submitting assignments?
+A: Assignments are submitted via the LMS or as instructed by your professor.
+
+Q: How do I access the campus newsletter?
+A: The newsletter is emailed to students and posted on the website.
+
+Q: Where can I find information about student exchange?
+A: The international office provides details on student exchange programs.
+
+Q: How do I get a copy of my timetable?
+A: Timetables are available on the student portal.
+
+Q: What is the university's code of conduct?
+A: The code of conduct is outlined in the student handbook.
+
+Q: How do I access online library resources?
+A: Online resources are accessible through the library website with your student login.
+
+Q: Where can I get help with academic writing?
+A: The writing center offers support for academic writing.
+
+Q: How do I request a fee receipt?
+A: Fee receipts can be downloaded from the finance section of the student portal.
+
+Q: What is the process for re-admission?
+A: Re-admission procedures are handled by the admissions office.
+
+Q: How do I access the campus medical clinic?
+A: The medical clinic is located in the health center.
+
+Q: Where can I find information about graduation ceremonies?
+A: Graduation ceremony details are posted on the registrar's page.
+
+Q: How do I get a copy of my degree certificate?
+A: Degree certificates are issued by the registrar's office after graduation.
+
+Q: What is the process for student transfers?
+A: Transfer applications are managed by the admissions office.
+
+Q: How do I access the campus radio?
+A: Campus radio can be streamed from the university website.
+
+Q: Where can I get help with mathematics?
+A: The math help center provides tutoring and support.
+
+Q: How do I request a change of address?
+A: Update your address in the student portal or at the administration office.
+
+Q: What is the university's attendance policy?
+A: Attendance policy requires at least 75% attendance for all courses.
+
+Q: How do I access the campus app?
+A: Download the campus app from the app store and log in with your student credentials.
+
+Q: Where can I find information about student insurance?
+A: Student insurance details are available at the health center and online.
+
+Q: How do I request a duplicate ID card?
+A: Request a duplicate ID card at the administration office.
+
+Q: What is the process for fee payment extensions?
+A: Fee extension requests must be submitted to the finance office.
+
+Q: How do I access the campus counseling center?
+A: Counseling services are available at the health center.
+
+Q: Where can I get help with computer science courses?
+A: The computer science department offers tutoring and support sessions.
+
+Q: How do I participate in cultural events?
+A: Cultural event details and sign-ups are available on the student portal.
+
+Q: What is the university's policy on academic integrity?
+A: Academic integrity policies are detailed in the student handbook.
+
+Q: How do I access the campus bookstore?
+A: The bookstore is located near the main entrance and online.
+
+Q: Where can I find information about student loans?
+A: Student loan information is available at the finance office.
+
+Q: How do I request a change of course section?
+A: Submit a section change request to the academic office.
+
+Q: What is the process for applying for on-campus jobs?
+A: On-campus job listings and applications are available on the career services page.
+
+Q: How do I access the campus swimming pool?
+A: Register at the sports complex to use the swimming pool.
+
+Q: Where can I get help with science courses?
+A: The science help center provides tutoring and support.
+
+Q: How do I participate in hackathons?
+A: Hackathon announcements and registrations are posted on the student portal.
+
+Q: What is the university's smoking policy?
+A: Smoking is prohibited in all campus buildings and designated areas are provided outside.
+
+Q: How do I access the campus innovation lab?
+A: The innovation lab is located in the engineering building and open to all students.
+
+Q: Where can I find information about student travel grants?
+A: Travel grant details are available at the international office.
+
+Q: How do I request a change of advisor?
+A: Advisor change requests can be submitted to the academic office.
+
+Q: What is the university's late submission policy?
+A: Late submissions may incur penalties as outlined in the course syllabus.
+
+Q: How do I access the campus art gallery?
+A: The art gallery is located in the cultural center and open during campus hours.
+
+Q: Where can I get help with language courses?
+A: The language center offers tutoring and support for language courses. 
