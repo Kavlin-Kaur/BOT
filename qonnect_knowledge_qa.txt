@@ -4,7 +4,7 @@ A: Qonnect is a campus bot designed to answer student queries.
 Q: How do I reset my campus password?
 A: Visit the IT helpdesk or use the online password reset portal.
 
-Q: Where can I find the academic calendar?
+Q: Where can I find the academic calendar?l,de
 A: The academic calendar is available on the university website under the 'Academics' section.
 
 Q: How do I contact the admissions office?
@@ -14,7 +14,7 @@ Q: What are the library opening hours?
 A: The library is open from 8 AM to 10 PM on weekdays and 9 AM to 6 PM on weekends.
 
 Q: How do I apply for a scholarship?
-A: Scholarship applications can be submitted online through the student portal.
+A: Scholarship applications can be submitted online through the student portal
 
 Q: Where is the cafeteria located?
 A: The cafeteria is located on the ground floor of the main building.
