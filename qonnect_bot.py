@@ -5,8 +5,10 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
+from langchain.prompts import PromptTemplate
 import traceback
 import re
+from datetime import datetime
 
 print('Step 1: Starting QonnectBot')
 
@@ -62,16 +64,67 @@ except Exception as e:
     input("Press Enter to exit...")
     exit()
 
-# Build retriever and chain
-retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
+# Create custom prompt template for better answers
+template = """You are QonnectBot, a helpful and friendly campus assistant. Answer questions based on the provided context.
+
+Context: {context}
+
+Question: {question}
+
+Instructions:
+- Answer directly and concisely (1-2 sentences maximum)
+- Be friendly and helpful
+- If the answer is not in the context, say "I don't have information about that. Please contact the relevant department."
+- Don't make up information
+- Focus on the most relevant part of the context
+
+Answer:"""
+
+prompt = PromptTemplate(template=template, input_variables=["context", "question"])
+
+# Build retriever and chain with custom prompt
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     retriever=retriever,
-    return_source_documents=True
+    chain_type="stuff",
+    return_source_documents=True,
+    chain_type_kwargs={"prompt": prompt}
 )
 print('Step 8: QA chain ready')
 
-# Chat loop
+# Global conversation memory
+conversation_memory = {}
+
+def get_conversation_context(session_id, current_question):
+    """Get conversation context from memory"""
+    if session_id not in conversation_memory:
+        return current_question
+    
+    # Get last 3 exchanges for context
+    recent_exchanges = conversation_memory[session_id][-3:]
+    context = "Previous conversation:\n"
+    for exchange in recent_exchanges:
+        context += f"Q: {exchange['question']}\nA: {exchange['answer']}\n"
+    context += f"\nCurrent question: {current_question}"
+    return context
+
+def add_to_memory(session_id, question, answer):
+    """Add exchange to conversation memory"""
+    if session_id not in conversation_memory:
+        conversation_memory[session_id] = []
+    
+    conversation_memory[session_id].append({
+        "question": question,
+        "answer": answer,
+        "timestamp": datetime.now().isoformat()
+    })
+    
+    # Keep only last 5 exchanges to prevent memory bloat
+    if len(conversation_memory[session_id]) > 5:
+        conversation_memory[session_id] = conversation_memory[session_id][-5:]
+
+# Chat loop with memory
 while True:
     query = input("\n🧠 Ask QonnectBot anything (or type 'exit'): ")
     if query.lower() in ["exit", "quit"]:
@@ -79,9 +132,22 @@ while True:
         break
 
     try:
-        result = qa_chain.invoke({"query": query})
-        print("\n💬 QonnectBot says:", result["result"])
+        # Generate session ID (simple implementation)
+        session_id = "default_session"
+        
+        # Get conversation context
+        context_query = get_conversation_context(session_id, query)
+        
+        # Get answer from bot
+        result = qa_chain.invoke({"query": context_query})
+        answer = result["result"]
+        
+        # Add to memory
+        add_to_memory(session_id, query, answer)
+        
+        print("\n💬 QonnectBot says:", answer)
         print("\n📄 Source:\n", result["source_documents"][0].page_content[:300], "...\n")
+        
     except Exception as e:
         print(f"⚠️ Oops! Something went wrong: {e}")
         traceback.print_exc()
