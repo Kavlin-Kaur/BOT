@@ -1,0 +1,24 @@
+{
+  "total_questions": 1,
+  "popular_questions": {
+    "what is qonnect": 1
+  },
+  "unanswered_questions": [],
+  "user_satisfaction": [
+    {
+      "question": "what is qonnect",
+      "rating": 2,
+      "feedback": "yes explain more",
+      "timestamp": "2025-06-29T21:26:02.634616"
+    }
+  ],
+  "daily_usage": {
+    "2025-06-29": 1
+  },
+  "session_count": 0,
+  "average_response_time": [
+    8.787133
+  ],
+  "knowledge_gaps": [],
+  "question_categories": {}
+}

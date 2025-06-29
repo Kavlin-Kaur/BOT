@@ -1,153 +1,135 @@
 import os
-from langchain_ollama import OllamaLLM
+import random
+from langchain_community.llms import Ollama
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-import traceback
-import re
-from datetime import datetime
 
-print('Step 1: Starting QonnectBot')
+# Cute bot
+class CuteBot:
+    def __init__(self):
+        self.greetings = ["Hi! 👋", "Hello! ✨", "Hey there! 🌟"]
+    
+    def greet(self):
+        return random.choice(self.greetings)
+    
+    def format_answer(self, answer):
+        if "wifi" in answer.lower():
+            return f"📶 {answer}"
+        elif "food" in answer.lower():
+            return f"🍕 {answer}"
+        elif "library" in answer.lower():
+            return f"📚 {answer}"
+        else:
+            return f"💡 {answer}"
 
-# Load local model (low RAM usage)
-llm = OllamaLLM(model="tinyllama")
-print('Step 2: Loaded OllamaLLM')
+# Initialize
+cute_bot = CuteBot()
 
-# Updated knowledge base path
-pdf_path = "qonnect_knowledge.pdf"  # Changed to match available file
-print(f'Step 3: Using PDF path: {pdf_path}')
+# Load model
+llm = Ollama(model="tinyllama")
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-# Load PDF content
-try:
-    loader = PyPDFLoader(pdf_path)
-    docs = loader.load()
-    print(f'Step 4: Loaded {len(docs)} documents from PDF')
-    if not docs:
-        raise ValueError("PDF is empty or not readable.")
-except Exception as e:
-    print(f"\n❌ Failed to load PDF: {e}\n")
-    input("Press Enter to exit...")
-    exit()
+# Load PDF
+loader = PyPDFLoader("qonnect_knowledge.pdf")
+documents = loader.load()
 
-# Instead of splitting by chunk size, split by Q&A pairs
-qa_documents = []
-for doc in docs:
-    # Find all Q&A pairs in the text, allowing for numbering and whitespace
-    pairs = re.findall(r'\d+\.\s*Q:.*?\n\s*A:.*?(?=\n\d+\.|$)', doc.page_content, re.DOTALL)
-    for pair in pairs:
-        qa_documents.append(type(doc)(page_content=pair.strip()))
-print(f'Step 5: Split into {len(qa_documents)} Q&A documents')
+# Split documents
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+texts = text_splitter.split_documents(documents)
 
-documents = qa_documents
+# Create or load vector store
+if os.path.exists("faiss_index"):
+    vectorstore = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
+else:
+    vectorstore = FAISS.from_documents(texts, embeddings)
+    vectorstore.save_local("faiss_index")
 
-# Create embeddings
-embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L6-v2")
-print('Step 6: Created HuggingFaceEmbeddings')
-
-# Create or load FAISS index
-index_path = "faiss_index"
-try:
-    if not os.path.exists(index_path):
-        print("📌 Creating new vector index...")
-        vectorstore = FAISS.from_documents(documents, embedding)
-        vectorstore.save_local(index_path)
-        print('Step 7: New FAISS index created and saved')
-    else:
-        print("✅ Loading existing vector index...")
-        vectorstore = FAISS.load_local(index_path, embedding, allow_dangerous_deserialization=True)
-        print('Step 7: Loaded existing FAISS index')
-except Exception as e:
-    print(f"❌ Failed to load FAISS index: {e}")
-    input("Press Enter to exit...")
-    exit()
-
-# Create custom prompt template for better answers
-template = """You are QonnectBot, a helpful and friendly campus assistant. Answer questions based on the provided context.
-
-Context: {context}
-
-Question: {question}
-
-Instructions:
-- Answer directly and concisely (1-2 sentences maximum)
-- Be friendly and helpful
-- If the answer is not in the context, say "I don't have information about that. Please contact the relevant department."
-- Don't make up information
-- Focus on the most relevant part of the context
-
-Answer:"""
-
-prompt = PromptTemplate(template=template, input_variables=["context", "question"])
-
-# Build retriever and chain with custom prompt
-retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+# Create QA chain
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
-    retriever=retriever,
     chain_type="stuff",
+    retriever=vectorstore.as_retriever(search_kwargs={"k": 2}),
     return_source_documents=True,
-    chain_type_kwargs={"prompt": prompt}
+    chain_type_kwargs={
+        "prompt": PromptTemplate(
+            input_variables=["context", "question"],
+            template="""You are QonnectBot, a friendly campus assistant! 
+
+Answer the question clearly and concisely using only the provided context.
+
+Context: {context}
+Question: {question}
+
+Answer:"""
+        )
+    }
 )
-print('Step 8: QA chain ready')
 
-# Global conversation memory
-conversation_memory = {}
-
-def get_conversation_context(session_id, current_question):
-    """Get conversation context from memory"""
-    if session_id not in conversation_memory:
-        return current_question
+# Simple analytics
+class SimpleAnalytics:
+    def __init__(self):
+        self.data = {"questions": 0, "satisfaction": []}
     
-    # Get last 3 exchanges for context
-    recent_exchanges = conversation_memory[session_id][-3:]
-    context = "Previous conversation:\n"
-    for exchange in recent_exchanges:
-        context += f"Q: {exchange['question']}\nA: {exchange['answer']}\n"
-    context += f"\nCurrent question: {current_question}"
-    return context
-
-def add_to_memory(session_id, question, answer):
-    """Add exchange to conversation memory"""
-    if session_id not in conversation_memory:
-        conversation_memory[session_id] = []
+    def track(self, question, rating=None):
+        self.data["questions"] += 1
+        if rating:
+            self.data["satisfaction"].append(rating)
     
-    conversation_memory[session_id].append({
-        "question": question,
-        "answer": answer,
-        "timestamp": datetime.now().isoformat()
-    })
-    
-    # Keep only last 5 exchanges to prevent memory bloat
-    if len(conversation_memory[session_id]) > 5:
-        conversation_memory[session_id] = conversation_memory[session_id][-5:]
+    def get_stats(self):
+        avg = sum(self.data["satisfaction"]) / len(self.data["satisfaction"]) if self.data["satisfaction"] else 0
+        return f"Questions: {self.data['questions']} | Avg Rating: {avg:.1f}/5"
 
-# Chat loop with memory
+analytics = SimpleAnalytics()
+
+# Main chat loop
+print("🎓 QonnectBot Ready!")
+print(cute_bot.greet())
+
 while True:
-    query = input("\n🧠 Ask QonnectBot anything (or type 'exit'): ")
-    if query.lower() in ["exit", "quit"]:
-        print("👋 Byeee! QonnectBot signing off.")
+    query = input("\nYou: ").strip()
+    
+    if not query:
+        continue
+    
+    if query.lower() in ['quit', 'exit', 'bye']:
+        print("👋 Bye!")
         break
-
+    elif query.lower() == 'stats':
+        print(f"📊 {analytics.get_stats()}")
+        continue
+    elif query.lower() in ['hello', 'hi', 'hey']:
+        print(cute_bot.greet())
+        continue
+    
     try:
-        # Generate session ID (simple implementation)
-        session_id = "default_session"
+        print("🤔 Thinking...")
         
-        # Get conversation context
-        context_query = get_conversation_context(session_id, query)
+        # Get answer
+        result = qa_chain.invoke({"query": query})
+        answer = result["result"].strip()
         
-        # Get answer from bot
-        result = qa_chain.invoke({"query": context_query})
-        answer = result["result"]
+        # Clean up answer
+        if "Q:" in answer and "A:" in answer:
+            parts = answer.split("A:")
+            if len(parts) > 1:
+                answer = parts[1].strip()
         
-        # Add to memory
-        add_to_memory(session_id, query, answer)
+        # Format and display
+        formatted_answer = cute_bot.format_answer(answer)
+        print(f"Bot: {formatted_answer}")
         
-        print("\n💬 QonnectBot says:", answer)
-        print("\n📄 Source:\n", result["source_documents"][0].page_content[:300], "...\n")
+        # Track
+        analytics.track(query)
+        
+        # Simple feedback
+        rating = input("Rate (1-5) or Enter to skip: ").strip()
+        if rating.isdigit() and 1 <= int(rating) <= 5:
+            analytics.track(query, int(rating))
+            print("Thanks! 💕")
         
     except Exception as e:
-        print(f"⚠️ Oops! Something went wrong: {e}")
-        traceback.print_exc()
+        print(f"Oops! {e}") 
